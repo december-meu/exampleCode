@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>JSTL 1.1 functions library</description>
+	<display-name>JSTL functions sys</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>fns</short-name>
+	<uri>http://java.sun.com/jsp/jstl/functionss</uri>
+
+
+
+	<function>
+		<description>根据用户id或账号获取用户角色编码串</description>
+		<name>getUserRoles</name>
+		<function-class>com.dadi.sys.utils.UserUtil</function-class>
+		<function-signature>java.util.Set getUserRoles(java.lang.String)</function-signature>
+		<example>${fns:getUserRoles(id)}</example>
+	</function>
+	<function>
+		<description>根据用户id或账号获取用户角色编码串</description>
+		<name>getUserPermissions</name>
+		<function-class>com.dadi.sys.utils.UserUtil</function-class>
+		<function-signature>java.util.Set getUserPermissions(java.lang.String)</function-signature>
+		<example>${fns:getUserPermissions(id)}</example>
+	</function>
+
+
+	<function>
+		<description>获取系统默认机构</description>
+		<name>getDefaultOrgInfo</name>
+		<function-class>com.dadi.sys.utils.SysUtil</function-class>
+		<function-signature>java.util.String getDefaultOrgInfo()</function-signature>
+		<example>${fns:getDefaultOrgInfo()}</example>
+	</function>
+
+	<!-- 将对象format成json字符串 -->
+	<function>
+		<name>toJsonStringObj</name>
+		<!-- <description>Reverses the characters in the given String</description> -->
+		<function-class>com.dadi.sys.utils.JsonUtil</function-class>
+		<function-signature>String toJsonStringObj(java.lang.Object)</function-signature>
+		<!-- <description>将对象format成json字符串</description> -->
+		<example>${fns:toJsonObj(value)}</example>
+	</function>
+	<!-- 将对象format成json字符串 -->
+	<function>
+		<name>toJsonStringArray</name>
+		<!-- <description>Reverses the characters in the given String</description> -->
+		<function-class>com.dadi.sys.utils.JsonUtil</function-class>
+		<function-signature>String toJsonStringArray(java.lang.Object)</function-signature>
+		<!-- <description>将对象format成json字符串</description> -->
+		<example>${fns:toJsonArray(value)}</example>
+	</function>
+</taglib>

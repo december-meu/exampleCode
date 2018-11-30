@@ -1,0 +1,105 @@
+package com.dadi.nyd.service.impl;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.collections.map.HashedMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import com.dadi.auth.AuthUser;
+import com.dadi.base.model.Pager;
+import com.dadi.nyd.dao.PrjBoundaryDao;
+import com.dadi.nyd.entity.PrjBoundary;
+import com.dadi.nyd.service.PrjBoundaryService;
+import com.dadi.util.StringUtils;
+
+@Service
+public class PrjBoundaryServiceImpl implements PrjBoundaryService {
+	@Autowired
+	private PrjBoundaryDao PrjBoundaryDao;
+
+	@Override
+	public PrjBoundary findById(String id) {
+		return PrjBoundaryDao.findOne(id);
+	}
+
+	@Override
+	public Page<PrjBoundary> findByFilter(Specification<PrjBoundary> spec, Pageable pageRequest) {
+		return PrjBoundaryDao.findAll(spec, pageRequest);
+	}
+
+	@Override
+	public List<PrjBoundary> findByFilter(Specification<PrjBoundary> spec, Sort sort) {
+		return PrjBoundaryDao.findAll(spec, sort);
+	}
+
+	@Override
+	public List<PrjBoundary> findByFilter(Specification<PrjBoundary> spec) {
+		return PrjBoundaryDao.findAll(spec);
+	}
+
+	@Override
+	public int delete(String id) {
+		return PrjBoundaryDao.deletById(id);
+	}
+
+	@Override
+	public int batchDelete(String ids) {
+		Set<String> idSet = StringUtils.sqlStrsToSet(ids);
+		return PrjBoundaryDao.batchDelete(idSet);
+	}
+
+	@Override
+	public PrjBoundary addPrjBoundary(PrjBoundary PrjBoundary) {
+		PrjBoundary.setCreateUser(AuthUser.getCurrentUser());
+		PrjBoundary.setCreateDate(new Date());
+		return PrjBoundaryDao.save(PrjBoundary);
+	}
+
+	@Override
+	public PrjBoundary updatePrjBoundary(PrjBoundary PrjBoundary) {
+		return PrjBoundaryDao.saveAfterClearCache(PrjBoundary);
+	}
+
+	@Override
+	public List<PrjBoundary> findByPrjId(String prjId) {
+		return PrjBoundaryDao.findByPrjId(prjId);
+	}
+
+	@Override
+	public Map<String, Object> findInfoByid(String id) {
+		StringBuilder SQL = new StringBuilder("select prj_info.prj_name as prjname,prj_info.prj_code as prjcode,"
+				+ "landtype.name as landtype,status.name as statusname ,status.id as statusid , "
+				+ "prj_info.prj_start_time as starttime ,prj_info.prj_end_time as endtime from prj_info " 
+				+ "left join prj_boundary on prj_boundary.prj_id = prj_info.id "
+				+ "left join prj_status on prj_info.id = prj_status.prj_id " 
+				+ "left join sys_dict as landtype on landtype.id = prj_boundary.land_type_id "
+				+ "left join sys_dict as status on status.id = prj_status.prj_state_id " 
+				+ "where prj_boundary.del = 0 and prj_boundary.id = '"+id+"'");
+		String sql = SQL.toString();
+		List<Map<String,Object>> list= PrjBoundaryDao.getMapsBySql(sql);
+		if(list.size()>0){
+			return list.get(0);
+		}else{
+			Map<String, Object> map = new HashMap<>();
+			map.put("msg", "未查询到该项目范围数据");
+			return map;
+		}
+	}
+
+	@Override
+	public List<Map<String, Object>> getPrjLand(String prjId) {
+		StringBuilder SQL = new StringBuilder("SELECT ST_ASTEXT(land_boundary) AS geom FROM prj_boundary WHERE prj_id = '"+prjId+"'");
+		String sql = SQL.toString();
+		List<Map<String,Object>> list= PrjBoundaryDao.getMapsBySql(sql);
+		return list;
+	}
+}

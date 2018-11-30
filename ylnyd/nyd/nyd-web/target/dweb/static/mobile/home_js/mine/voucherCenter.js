@@ -1,0 +1,19 @@
+SPA_RESOLVE_INIT = function(transition){
+	order={
+			addActive:function(){
+				$('#navbottom').css('display','none');
+				$('#home').css('margin-bottom',0).css('background','white');
+				$('#home').off('click','.pull-left');
+				$('#home').on('click','.pull-left',function(){
+					window.location.hash="#/account";
+				})
+				this.addHtml();
+			},
+			addHtml:function(){
+				$('#home').html(
+						''
+				);
+			}
+	}
+	order.addActive();
+}

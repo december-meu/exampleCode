@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans          
+    http://www.springframework.org/schema/beans/spring-beans.xsd          
+    http://code.alibabatech.com/schema/dubbo          
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- <dubbo:registry id="ddchzkserver" address="zookeeper://192.168.128.251:2181" -->
+	<!-- protocol="zookeeper" /> -->
+	<!-- <dubbo:registry id="ddch" address="zookeeper://192.168.1.243:2181" 
+		protocol="zookeeper" /> -->
+
+	<!-- <dubbo:protocol name="dubbo" port="20882" /> -->
+
+	<!--<dubbo:protocol name="webservice" port="8080" server="servlet" /> -->
+	<!-- 声明需要暴露的服务接口 -->
+	<!-- <dubbo:service interface="com.dadi.sys.api.BaseInfoInterface" -->
+	<!-- ref="baseService" registry="ddchzkserver" retries="3" cache="false" 
+		/> -->
+
+	<!-- 和本地bean一样实现服务 -->
+	<!-- <bean id="baseService" class="com.dadi.sys.api.impl.BaseInfoImp" /> -->
+</beans>

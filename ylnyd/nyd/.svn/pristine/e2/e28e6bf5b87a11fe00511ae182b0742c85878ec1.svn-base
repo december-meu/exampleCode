@@ -1,0 +1,23 @@
+<!--?xml version="1.0" encoding="UTF-8" ? -->
+<taglib version="2.1" xmlns="https://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemalocation="https://java.sun.com/xml/ns/javaee
+        https://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+
+	<description>Security JSP Tag</description>
+	<tlib-version>1.1</tlib-version>
+	<short-name>security</short-name>
+	<uri>/ddch/shiro/security</uri>
+
+	<tag>
+		<description>判断当前用户是否拥有其中所有的角色（逗号分隔，表示“与”的关系）</description>
+		<name>hasAllRoles</name>
+		<tag-class>com.dadi.shiro.tag.HasAllRolesTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

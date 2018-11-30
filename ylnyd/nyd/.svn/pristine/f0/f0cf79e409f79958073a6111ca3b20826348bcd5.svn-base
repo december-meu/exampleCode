@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>nyd</artifactId>
+		<groupId>com.dadi.biz</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>nyd-web</artifactId>
+	<packaging>war</packaging>
+	<name>nyd-web</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dadi.biz</groupId>
+			<artifactId>nyd-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- WEB Dependencies BEGIN -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- WEB Dependencies END -->
+
+		<dependency>
+			<groupId>com.dadi.frame</groupId>
+			<artifactId>common-core</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.dadi.frame</groupId>
+			<artifactId>common-config</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.dadi.frame</groupId>
+			<artifactId>common-web</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.dadi.frame</groupId>
+			<artifactId>sys-web</artifactId>
+			<version>1.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.dadi.frame</groupId>
+					<artifactId>common-config</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.dadi.frame</groupId>
+					<artifactId>common-core</artifactId>
+				</exclusion>
+			</exclusions>
+			<type>war</type>
+		</dependency>
+
+
+	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>public</name>
+			<url>http://192.168.128.251:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Snapshots</name>
+			<url>http://192.168.128.251:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<build>
+		<finalName>dweb</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<!-- 加上这一行，主项目中可以没有web.xml -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<warName>dweb</warName>
+					<overlays>
+						<overlay>
+							<groupId>com.dadi.frame</groupId>
+							<artifactId>sys-web</artifactId>
+							<excludes>
+								<exclude>WEB-INF/cas.properties</exclude>
+								<exclude>WEB-INF/classes/logback.xml</exclude>
+								<exclude>WEB-INF/lib/common-config-**.jar</exclude>
+							</excludes>
+						</overlay>
+						<overlay></overlay>
+						<overlay>
+							<groupId>com.dadi.frame</groupId>
+							<artifactId>common-web</artifactId>
+							<excludes>
+								<exclude>WEB-INF/cas.properties</exclude>
+								<exclude>WEB-INF/classes/logback.xml</exclude>
+								<exclude>WEB-INF/lib/common-config-**.jar</exclude>
+							</excludes>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-archetype-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+
+			<!-- resource插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<includeEmptyDirs>true</includeEmptyDirs>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+
+	</build>
+
+</project>

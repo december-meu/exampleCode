@@ -1,0 +1,14 @@
+[base_auth]
+/loginout.jsp=anon
+/static/**=anon
+/pages/**=anon
+/shiro-cas=casFilter
+/baseInfoWs/** = anon
+/**=authc
+/logout=logoutFilter
+/**=sessionFilter
+/index=authc
+
+
+
+

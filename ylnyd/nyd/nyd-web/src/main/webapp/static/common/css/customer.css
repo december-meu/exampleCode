@@ -1,0 +1,143 @@
+.treeview .list-group-item {
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.has-feedback label ~.form-control-feedback {
+	top: 0px;
+}
+
+.input-group[class*=col-] {
+	float: none;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+ul.op {
+	list-style: none; /* ȥ��ulǰ��ķ��� */
+	margin: 0px; /* �����Ԫ�صľ���Ϊ0 */
+	padding: 0px; /* ���ڲ�Ԫ�صľ���Ϊ0 */
+	width: auto; /* ��ȸ���Ԫ�����ݵ��� */
+}
+
+ul.op li {
+	float: left; /* ����Ư�ƣ������ű�Ϊ���� */
+}
+
+.navbar-static-side {
+	
+}
+
+.top_msg span.hight_light {
+	font-size: 18px;
+	color: #d49113;
+}
+
+.top_msg span.td_left {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.fixed-table-container td {
+	font-size: 14px
+}
+
+.fixed-table-container th {
+	font-size: 14px;
+}
+
+.btn-sm {
+	font-size: 14px;
+	margin-right: 8px;
+}
+
+.customerTools {
+	margin-top: -88px !important;
+}
+
+.customerTools>div>button {
+	height: 25px;
+	width: 50px;
+	color: #676a6c;
+	background: #fff;
+	border: none;
+}
+
+.customerTools>div>button:hover {
+	color: #676a6c;
+	background: #fff;
+	border: none;
+}
+
+.searchDiv {
+	margin-bottom: 0;
+}
+
+.searchDiv .ibox-content {
+	padding-bottom: 15px;
+}
+
+.searchDiv .ibox-content form {
+	margin-bottom: 0;
+}
+
+.customLabel {
+	margin: 0 10px 0 10px;
+}
+
+.fujianList {
+	padding-top: 8px;
+	list-style: none;
+}
+
+.fujianli {
+	float: left;
+	margin-right: 6px;
+}
+
+.delfujian {
+	cursor: pointer;
+}
+
+.selectinputdata {
+	position: fixed;
+	max-height: 200px;
+	overflow-y: auto;
+	z-index: 100;
+	background-color: #fff;
+	list-style: none;
+	border: 1px solid #ccc;
+	padding: 0;
+}
+
+.selectinputdata .selectinputdatali {
+	font-weight: normal;
+	display: block;
+	white-space: pre;
+	min-height: 1.2em;
+	padding: 3px 1px 3px 8px;
+	cursor: pointer;
+}
+
+.selectinputdata .selectinputdatali:hover {
+	background-color: #1E90FF;
+	color: white;
+}
+
+.glyphicon-ok, .glyphicon-remove, .glyphicon-plus, .glyphicon-edit {
+	margin-right: 8px;
+}
+
+.date-icon {
+	border: 1px solid #ccc;
+	background-image: url(./images/icon.png);
+	height: 34px;
+	padding-right: 20px;
+	min-width: 34px;
+	vertical-align: text-top;
+	border: 1px solid #C6C6C6;
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-color: #fff;
+	outline: 0;
+}

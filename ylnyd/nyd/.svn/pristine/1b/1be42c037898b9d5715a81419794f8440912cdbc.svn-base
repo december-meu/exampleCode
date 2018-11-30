@@ -1,0 +1,464 @@
+var prjId = $('#prjId').val()
+console.log(prjId)
+
+var validator;
+var vaildatorRule = {};
+function initValidator() {
+    vaildatorRule = {
+	message : '内容不能为空!',
+	feedbackIcons : {
+	    valid : 'glyphicon glyphicon-ok',
+	    invalid : 'glyphicon glyphicon-remove',
+	    validating : 'glyphicon glyphicon-refresh'
+	},
+	fields : {
+		applier : {
+	        // 提示消息
+	        message : '申请人不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '申请人不能为空'
+	            },
+	        }
+	    },
+	    prjName : {
+	        // 提示消息
+	        message : '项目名称不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '项目名称不能为空'
+	            },
+	        }
+	    },
+	    prjLeader : {
+	        // 提示消息
+	        message : '项目负责人不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '项目负责人不能为空'
+	            },
+	        }
+	    },
+	    idcard : {
+	        // 提示消息
+	        message : '填写正确的身份证号码',
+	        // 需要做的验证
+	        validators : {
+	            notEmpty : {
+		        message : '身份证号码不能为空'
+	            },
+	            regexp: {/* 只需加此键值对，包含正则表达式，和提示 */
+                    regexp: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+//                    message: '身份证号'
+                },
+	        }
+	    },
+	    phone : {
+	        // 提示消息
+	        message : '填写正确的电话号码',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '手机号码不能为空'
+	            },
+	            regexp: {/* 只需加此键值对，包含正则表达式，和提示 */
+                    regexp: /^1[23456789]\d{9}$/,
+//                    message: '身份证号'
+                },
+	        }
+	    },
+	    location : {
+	        // 提示消息
+	        message : '土地座落不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '土地座落不能为空'
+	            },
+	        }
+	    },
+	    recordType : {
+	        // 提示消息
+	        message : '类型备案为必选',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '类型备案为必选'
+	            },
+	        }
+	    },
+	    boundary : {
+	        // 提示消息
+	        message : '设施用地不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '设施用地不能为空'
+	            },
+	        }
+	    },
+	    prjStartTime : {
+	        // 提示消息
+	        message : '开始时间不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '开始时间不能为空'
+	            },
+	        }
+	    },
+	    prjEndTime : {
+	        // 提示消息
+	        message : '结束时间不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '结束时间不能为空'
+	            },
+	        }
+	    },
+	    prodYonDoc: {
+	        // 提示消息
+	        message : '承诺书为必选',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '承诺书为必选'
+	            },
+	        }
+	    },
+	    attachYonDoc: {
+	        // 提示消息
+	        message : '承诺书为必选',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '承诺书为必选'
+	            },
+	        }
+	    },
+	    assortTotalDoc: {
+	        // 提示消息
+	        message : '承诺书和方案为必选',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '承诺书和方案为必选'
+	            },
+	        }
+	    }
+	    
+//	    prjManager : {
+//	        // 提示消息
+//	        message : '项目经理',
+//	        // 需要做的验证
+//	        validators : {
+//	            // 验证项
+//	            notEmpty : {
+//	                message : '项目经理',
+//	                callback : {
+//	                    message : "项目经理不能为空",
+//	                    callback : function(value, validator) {
+//
+//		                if (!value || value == "") {
+//
+//		                    return false;
+//		                } else {
+//		                    return true;
+//		                }
+//
+//	                    }
+//	                }
+//	            },
+//	        }
+//	    },
+
+
+	}
+    };
+
+}
+
+$(function(){
+	
+	$("#navUl").on("click","li",function(){
+		$(this).addClass("active").siblings().removeClass("active");
+		$("#divmap .divChange").eq($(this).index()).show().siblings().hide()
+	})
+	
+	$("#divmap").on("click",".jzdForm",function(){
+		layershow("加载项目界址点信息", webPath + "nyd/prj/upload/caseScope?prjId=" + prjId, "900px",'30%');
+	})
+	
+	var mainList = new MainList();
+	mainList.Init();
+	
+	$("#tableFather").on("click",".upLoadFile",function(){
+		var id=$(this).data("id");
+	})
+	$("body").on("click",".delFile",function(){
+		var id=$(this).data("id");
+		layer.confirm('确定删除吗?', {
+		    btn : [ '确定', '取消' ],
+		    title : "提示"
+		},function(index){
+			$.ajax({
+				url:webPath+"nyd/prj/deleteFile?id="+id,
+				type:"post",
+				success:function(data){
+					$('#tableBs').bootstrapTable('refresh');
+					layer.close(index);
+				}
+			})
+		})
+	})	
+	
+	    laydate.render({
+			elem : '#prjStartTime',
+			position : 'fixed',
+			theme : 'molv',
+			format : "yyyy-MM-dd",
+			btns : [ 'clear', 'now' ],
+			done : function(value, date) {
+			    validator.updateStatus("prjStartTime", "NOT_VALIDATED", null);
+			    validator.validateField("prjStartTime");
+			}
+		});
+		laydate.render({
+			elem : '#prjEndTime',
+			position : 'fixed',
+			theme : 'molv',
+			format : "yyyy-MM-dd",
+			btns : [ 'clear', 'now' ],
+			done : function(value, date) {
+			    validator.updateStatus("prjEndTime", "NOT_VALIDATED", null);
+			    validator.validateField("prjEndTime");
+			}
+		});
+		initValidator()
+	    $("#tableFather").bootstrapValidator(vaildatorRule);
+		    validator = $("#tableFather").data('bootstrapValidator');
+		$("#saveMsgBtn").on("click", function() {
+			validator.validate();
+			if (!validator.isValid()) {
+			    return;
+			}
+			var a = formtoJsonTrim('tableFather');
+//			console.log(a)
+			$.ajax({
+			    url : webPath + "nyd/prj/save",
+			    type : "post",
+			    // async:false,
+			    data : a,
+			    success : function(data) {
+//			    	console.log(data)
+			    	layer.msg("保存成功")
+			    	setTimeout(function() {
+						parent.$('#dataList').bootstrapTable('refresh', {
+						    silent : true
+						});
+						parent.layer.closeAll();
+					    }, 1000)
+			    }
+			})
+	  })
+	  $(".shengchanCash").keyup(function(){
+		  $(this).val($(this).val().replace(/[^\d\.]/g,""))
+		  $(this).val($(this).val().replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'))
+		  var str=0;
+		  $(".shengchanCash").each(function(){
+			  str+=Number(this.value);
+		  })
+		  $("#scMoney").val(str)
+	  })
+	  
+	  $(".fsscCash").keyup(function(){
+		  $(this).val($(this).val().replace(/[^\d\.]/g,""))
+		  $(this).val($(this).val().replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'))
+		  var str=0;
+		  $(".fsscCash").each(function(){
+			  str+=Number(this.value);
+		  })
+		  $("#fsscMoney").val(str)
+	  })
+	  $(".ptCash").keyup(function(){
+		  $(this).val($(this).val().replace(/[^\d\.]/g,""))
+		  $(this).val($(this).val().replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'))
+		  var str=0;
+		  $(".ptCash").each(function(){
+			  str+=Number(this.value);
+		  })
+		  $("#ptMoney").val(str)
+	  }) 
+})
+
+ function initFileInput(ctrlName) {
+	var control = $("#"+ctrlName);
+		console.log(control)
+		control.fileinput({
+	    language : 'zh', // 设置语言
+	    uploadUrl : webPath + "nyd/prj/upload", // 上传的地址
+	    uploadExtraData : function() {
+		var params = {};
+		params.prjId = control.data("prjid");
+		params["attachType.id"]=control.data("aid");
+		params.id = control.data('id');
+		console.log( control.data('id'))
+		return params;
+	    }, // 接收额外的参数
+	    allowedFileExtensions :  [ 'pdf', 'jpg','png',"PDF"],
+	    uploadAsync : false, // 默认异步上传
+	    showUpload : false, // 是否显示上传按钮
+	    actionUpload : '',
+	    showRemove : false, // 显示移除按钮
+	    showPreview : false, // 是否显示预览
+	    showCaption : false,// 是否显示标题
+	    browseClass : "btn btn-primary", // 按钮样式
+	    dropZoneEnabled : false,// 是否显示拖拽区域
+//	    previewFileType:["image"],
+	    // minImageWidth: 50, //图片的最小宽度
+	    // minImageHeight: 50,//图片的最小高度
+	    // maxImageWidth: 1000,//图片的最大宽度
+	    // maxImageHeight: 1000,//图片的最大高度
+	    // maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+	    // minFileCount: 0,
+	     maxFileCount: 1, //表示允许同时上传的最大文件个数
+	    enctype : 'multipart/form-data',
+	    validateInitialCount : true,
+	    previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",
+	    msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+	}).on("filebatchselected", function(event, files) {
+		if(prjId!=""&&escape(files[0].name).indexOf("%u")==-1){
+			$(this).fileinput("upload");
+			console.log('文件上传成功！' + data.id);
+		    $('#tableBs').bootstrapTable('refresh');
+		}else{
+			layer.msg("上传附件名字不能有汉字");
+			$(this).fileinput("reset");
+		}
+		return false;
+	}).on("fileuploaded", function(event, data, previewId, index) { // 一个文件上传成功
+	
+	    
+
+	}).on('fileerror', function(event, data, msg) { // 一个文件上传失败
+	    console.log('文件上传失败！' + data.id);
+	    // parent.$('#resultTable').bootstrapTable('refresh');
+	    // parent.layer.closeAll();
+	}).on('filebatchuploadsuccess', function() {
+		layer.msg("上传成功")
+	   $('#tableBs').bootstrapTable('refresh');
+	})
+    }
+
+var MainList = function() {
+
+	var mainList = new Object();
+	var url =webPath+ "nyd/prj/getAttach?prjId="+prjId;
+	var columns = [{
+		checkbox: true
+	},
+	{
+		field: "id",
+		visible: false,
+		title: "id",
+	},
+	{
+		field: "",
+		title: "序号",
+		formatter: function(value, row, index) {
+			return index+1
+		},
+		align:"center"
+	},
+	{
+//		field: "",
+		title: "附件名称",
+		formatter: function(value, row, index) {
+			if (row.attachType) {
+				return row.attachType.name
+			} else {
+				return ""
+			}
+		},
+		align:"center"
+	},
+	{
+		field: "",
+		title: "上传状态",
+		formatter: function(value, row, index) {
+			if (!row.attachUrl) {
+				return "待上传"
+			} else {
+				return "已上传"
+			}
+		},
+		align:"center"
+	},
+	{
+		field: "createDate",
+		title: "上传时间",
+		align:"center"
+	},
+	{
+		field: "",
+		title: "操作",
+		formatter: function(value, row, index) {
+			console.log(row)
+			if (!row.attachUrl) {
+				return '<div style="width:500px;float:right;"><input id="FileInput'+index+'" data-index="'+index+'" class="input-files" data-id="'+row.id+'" data-aid="'+row.attachType.id+'" data-prjid="'+row.prjId+'"  class="input-files" name="files" filePlural="文件" multiple type="file" data-show-caption="true"></div>'
+			} else {
+				if(row.attachUrl.indexOf(".pdf")!=-1||row.attachUrl.indexOf(".PDF")!=-1){
+					return "<a style='color:#1AB394' href='"+webPath+"nyd/prj/gotoViewer?id="+row.id+"' target='_blank' >查看</a>&nbsp;&nbsp;&nbsp;<a href='javascript:;' data-id='"+row.id+"' class='reds delFile'>删除</a>"
+					}else{
+						return "<a  style='color:#1AB394' download='" + row.attachType.name + "' href='" + domainPath + row.attachUrl + "' >查看</a>&nbsp;&nbsp;&nbsp;<a href='javascript:;' data-id='"+row.id+"' class='reds delFile'>删除</a>"
+					}
+			}
+		},
+		align:"center"
+	}
+	
+	];
+	mainList.Init = function() {
+		var option=getBsTableOptions(url, "toolbar", columns, mainList.queryParams, null,null,"300px");
+			option.onLoadSuccess=function(data){
+				$(".input-files").each(function(){
+					var that=$(this)
+					initFileInput("FileInput"+that.data("index"))
+				})
+			}
+		$("#tableBs").bootstrapTable(option);
+		
+	};
+	mainList.queryParams = function(params) {
+		var temp = {
+			pageSize: params.pageSize,
+			pageNumber: params.pageNumber,
+		};
+		return temp
+	};
+	return mainList
+}
+
+
+
+
+
+
+

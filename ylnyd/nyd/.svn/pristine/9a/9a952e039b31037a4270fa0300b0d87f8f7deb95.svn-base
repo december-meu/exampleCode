@@ -1,0 +1,152 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	outline: none;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-bottom: 7px;
+}
+
+.row {
+	margin: 0;
+	padding: 0;
+}
+
+.form-control {
+	border: 1px solid #ccc;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+textarea {
+	resize: none;
+}
+
+.col-xs-12 {
+	padding: 0;
+}
+
+.divlines {
+	border-bottom: 1px solid #d9dfea;
+	padding: 12px 0;
+	clear: both;
+	overflow: hidden;
+}
+
+.border {
+	border: 1px solid #ccc;
+}
+
+.reds {
+	color: #f00;
+}
+
+.lvses {
+	color: #1ab394;
+}
+
+.col-xs-6 {
+	padding-left: 0;
+}
+
+.widthLabel {
+	width: 146px;
+}
+
+.text-right {
+	margin-top: 10px;
+}
+
+.textareaLabel {
+	margin-top: 18px;
+	padding: 0;
+}
+
+.col-xs-3 {
+	padding: 0
+}
+
+.fujianList {
+	padding-top: 8px;
+	list-style: none;
+	padding-left: 0;
+}
+
+.fujianli {
+	float: left;
+	margin-right: 6px;
+}
+
+.delfujian {
+	cursor: pointer;
+}
+
+.btnsDiv {
+	margin: 0 14px;
+}
+
+.bbottom {
+	border-bottom: 1px solid #d9dfea;
+}
+
+.detailForm {
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin: 0 14px;
+}
+
+.detailForm .pagination-info {
+	display: none;
+}
+
+.borderleftright {
+	border-left: 1px solid #d9dfea;
+	border-right: 1px solid #d9dfea;
+}
+
+.searchjob {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 14px;
+	right: 26px;
+	font-size: 24px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.searchjob span {
+	width: 100%;
+	height: 100%;
+}
+
+.topline {
+	margin-top: 14px;
+}
+
+.btop {
+	border-top: 1px solid #d9dfea;
+}
+
+.versionText {
+	position: absolute;
+	right: 10px;
+	top: 30%;
+	background-color: #1ab394;
+	color: #FFFFFF;
+	font-size: 10px;
+	font-weight: 600;
+	padding: 3px 8px;
+	text-shadow: none;
+	border-radius: .25em;
+}
+
+.ibox-title {
+	position: relative;
+}

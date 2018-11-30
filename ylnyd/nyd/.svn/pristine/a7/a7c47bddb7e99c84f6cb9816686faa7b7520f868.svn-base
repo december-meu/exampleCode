@@ -1,0 +1,88 @@
+package com.dadi.nyd.web;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.dadi.base.constants.RespContants;
+import com.dadi.base.controller.BaseController;
+import com.dadi.core.modules.persistence.query.JpaQuery;
+import com.dadi.nyd.entity.PrjInfo;
+import com.dadi.nyd.service.PrjInfoService;
+import com.dadi.sys.utils.BootstrapUtil;
+import com.dadi.util.StringUtils;
+
+@Controller
+@RequestMapping("nyd/prj")
+public class PrjInfoController extends BaseController {
+	@Autowired
+	private PrjInfoService prjInfoService;
+
+	@RequestMapping(value = { "index", "" })
+	public String index(HttpServletRequest request, Model model, HttpSession session) {
+		return "nyd/prj/index";
+	}
+
+	@ModelAttribute("prjInfo")
+	public PrjInfo get(@RequestParam(required = false) String id) {
+		if (StringUtils.isNotBlank(id)) {
+			return prjInfoService.findById(id);
+		} else {
+			return new PrjInfo();
+		}
+	}
+
+	@RequestMapping(value = "/list")
+	@ResponseBody
+	public Map<String, Object> list(HttpServletRequest request, Model model) {
+		JpaQuery<PrjInfo> query = getQuery(request);
+		Page<PrjInfo> PrjInfoPage = prjInfoService.findByFilter(query.getSpec(), query.getPageRequest());
+		return BootstrapUtil.getPageData(PrjInfoPage);
+	}
+
+	// 添加或修改页面
+	@RequestMapping(value = "/form", method = RequestMethod.GET)
+	public String getSaveOrUpdateForm(String prjId, Model model) {
+		return "nyd/prj/form";
+	}
+
+	@RequestMapping(value = "/save")
+	@ResponseBody
+	public Map<String, Object> add(PrjInfo prjInfo, @RequestParam(required = false) String prjId) {
+		PrjInfo prjInfoed = null;
+		String id = prjInfo.getId();
+		if (StringUtils.isBlank(id)) {
+			prjInfoed = prjInfoService.addPrjInfo(prjInfo);
+		} else {
+
+			prjInfoed = prjInfoService.updatePrjInfo(prjInfo);
+		}
+		return getResponse(RespContants.OK, "操作成功！", prjInfoed);
+	}
+
+	@RequestMapping(value = "/delete")
+	@ResponseBody
+	public Map<String, Object> delete(String id) throws Exception {
+		int count = prjInfoService.delete(id);
+		return getResponse(RespContants.OK, "删除了" + count + "调数据！", null);
+	}
+
+	@RequestMapping(value = "/batchdelete")
+	@ResponseBody
+	public Map<String, Object> batchDelete(String ids) throws Exception {
+		int count = prjInfoService.batchDelete(ids);
+		return getResponse(RespContants.OK, "删除了" + count + "调数据！", null);
+	}
+
+}

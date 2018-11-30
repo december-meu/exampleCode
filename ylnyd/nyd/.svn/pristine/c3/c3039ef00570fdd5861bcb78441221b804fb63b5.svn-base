@@ -1,0 +1,388 @@
+var validator;
+var vaildatorRule = {};
+function initValidator() {
+    vaildatorRule = {
+	message : '内容不能为空!',
+	feedbackIcons : {
+	    valid : 'glyphicon glyphicon-ok',
+	    invalid : 'glyphicon glyphicon-remove',
+	    validating : 'glyphicon glyphicon-refresh'
+	},
+	fields : {
+		applier : {
+	        // 提示消息
+	        message : '申请人不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '申请人不能为空'
+	            },
+	        }
+	    },
+	    prjName : {
+	        // 提示消息
+	        message : '项目名称不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '项目名称不能为空'
+	            },
+	        }
+	    },
+	    prjLeader : {
+	        // 提示消息
+	        message : '项目负责人不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '项目负责人不能为空'
+	            },
+	        }
+	    },
+	    idcard : {
+	        // 提示消息
+	        message : '身份证号不能为空',
+	        // 需要做的验证
+	        validators : {
+	            notEmpty : {
+		        message : '身份证号不能为空'
+	            },
+	            regexp: {/* 只需加此键值对，包含正则表达式，和提示 */
+                    regexp: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+//                    message: '身份证号'
+                },
+	        }
+	    },
+	    phone : {
+	        // 提示消息
+	        message : '电话不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '电话不能为空'
+	            },
+	            regexp: {/* 只需加此键值对，包含正则表达式，和提示 */
+                    regexp: /^1[34578]\d{9}$/,
+//                    message: '身份证号'
+                },
+	        }
+	    },
+	    location : {
+	        // 提示消息
+	        message : '土地座落不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '土地座落不能为空'
+	            },
+	        }
+	    },
+	    recordType : {
+	        // 提示消息
+	        message : '类型备案为必选',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '类型备案为必选'
+	            },
+	        }
+	    },
+	    boundary : {
+	        // 提示消息
+	        message : '设施用地不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '设施用地不能为空'
+	            },
+	        }
+	    },
+	    prjStartTime : {
+	        // 提示消息
+	        message : '开始时间不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '开始时间不能为空'
+	            },
+	        }
+	    },
+	    prjEndTime : {
+	        // 提示消息
+	        message : '结束时间不能为空',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '结束时间不能为空'
+	            },
+	        }
+	    },
+	    prodYonDoc: {
+	        // 提示消息
+	        message : '承诺书为必选',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '承诺书为必选'
+	            },
+	        }
+	    },
+	    attachYonDoc: {
+	        // 提示消息
+	        message : '承诺书为必选',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '承诺书为必选'
+	            },
+	        }
+	    },
+	    assortTotalDoc: {
+	        // 提示消息
+	        message : '承诺书和方案为必选',
+	        // 需要做的验证
+	        validators : {
+	            // 验证项
+	            notEmpty : {
+		        message : '承诺书和方案为必选'
+	            },
+	        }
+	    }
+	    
+//	    prjManager : {
+//	        // 提示消息
+//	        message : '项目经理',
+//	        // 需要做的验证
+//	        validators : {
+//	            // 验证项
+//	            notEmpty : {
+//	                message : '项目经理',
+//	                callback : {
+//	                    message : "项目经理不能为空",
+//	                    callback : function(value, validator) {
+//
+//		                if (!value || value == "") {
+//
+//		                    return false;
+//		                } else {
+//		                    return true;
+//		                }
+//
+//	                    }
+//	                }
+//	            },
+//	        }
+//	    },
+
+
+	}
+    };
+
+}
+
+$(function(){
+	
+	$("#navUl").on("click","li",function(){
+		$(this).addClass("active").siblings().removeClass("active");
+		$("#divmap .divChange").eq($(this).index()).show().siblings().hide()
+	})
+	
+	var mainList = new MainList();
+	mainList.Init();
+	
+	$("#tableFather").on("click",".upLoadFile",function(){
+		var id=$(this).data("id");
+	})
+//	$("#tableFather").on("click",".checkFile",function(){
+//		var id=$(this).data("id");
+//	})
+	$("#tableFather").on("click",".delFile",function(){
+		var id=$(this).data("id");
+		layer.msg("是否删除",function(){
+			$.ajax({
+				url:webPath+"nyd/prj/deleteFile?id="+id,
+				type:"post",
+				success:function(data){
+					layer.alert("删除成功")
+				}
+			})
+		})
+	})
+	
+//	    initFileInput("input-files");
+	    laydate.render({
+			elem : '#prjStartTime',
+			position : 'fixed',
+			theme : 'molv',
+			format : "yyyy-MM-dd",
+			btns : [ 'clear', 'now' ],
+			done : function(value, date) {
+			    validator.updateStatus("prjStartTime", "NOT_VALIDATED", null);
+			    validator.validateField("prjStartTime");
+			}
+		});
+		laydate.render({
+			elem : '#prjEndTime',
+			position : 'fixed',
+			theme : 'molv',
+			format : "yyyy-MM-dd",
+			btns : [ 'clear', 'now' ],
+			done : function(value, date) {
+			    validator.updateStatus("prjEndTime", "NOT_VALIDATED", null);
+			    validator.validateField("prjEndTime");
+			}
+		});
+		initValidator()
+	    $("#tableFather").bootstrapValidator(vaildatorRule);
+		    validator = $("#tableFather").data('bootstrapValidator');
+		    $("#saveMsgBtn").on("click", function() {
+			validator.validate();
+			if (!validator.isValid()) {
+			    return;
+			}
+			var a = formtoJsonTrim('tableFather');
+			console.log(a)
+			$.ajax({
+			    url : webPath + "nyd/prj/save",
+			    type : "post",
+			    // async:false,
+			    data : a,
+			    success : function(data) {
+			    	console.log(data)
+			    
+			    }
+			})
+			
+	  })
+})
+
+
+
+ function initFileInput(ctrlName) {
+	var control = $('.' + ctrlName);
+	control.fileinput({
+	    language : 'zh', // 设置语言
+	    uploadUrl : webPath + "prj/info/upload", // 上传的地址
+	    uploadExtraData : function() {
+		// @@@ 缺prjID 地址未换 参数不定
+	    	
+		var prjId = $('#prjId').val();
+		if (prjId == null || prjId == '') {
+		    return;
+		}
+		var params = {};
+		params.prjId = prjId;
+
+		return params;
+	    }, // 接收额外的参数
+	    allowedFileExtensions : null,// 接收的文件后缀 [ 'pdf', 'doc',
+					    // 'docx',"xlsx" ,"xls"]
+	    uploadAsync : false, // 默认异步上传
+	    showUpload : true, // 是否显示上传按钮
+	    actionUpload : '',
+	    showRemove : true, // 显示移除按钮
+	    showPreview : false, // 是否显示预览
+	    showCaption : false,// 是否显示标题
+	    browseClass : "btn btn-primary", // 按钮样式
+	    dropZoneEnabled : false,// 是否显示拖拽区域
+	    // minImageWidth: 50, //图片的最小宽度
+	    // minImageHeight: 50,//图片的最小高度
+	    // maxImageWidth: 1000,//图片的最大宽度
+	    // maxImageHeight: 1000,//图片的最大高度
+	    // maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+	    // minFileCount: 0,
+	    // maxFileCount: 10, //表示允许同时上传的最大文件个数
+	    enctype : 'multipart/form-data',
+	    validateInitialCount : true,
+	    previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",
+	    msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+	}).on("fileuploaded", function(event, data, previewId, index) { // 一个文件上传成功
+	    console.log('文件上传成功！' + data.id);
+	    $('#tableBs').bootstrapTable('refresh');
+
+	}).on('fileerror', function(event, data, msg) { // 一个文件上传失败
+	    console.log('文件上传失败！' + data.id);
+	    // parent.$('#resultTable').bootstrapTable('refresh');
+	    // parent.layer.closeAll();
+	}).on('filebatchuploadsuccess', function() {
+		
+	   $('#tableBs').bootstrapTable('refresh');
+	})
+    }
+
+var MainList = function() {
+	var mainList = new Object();
+	var url =webPath+ "nyd/prj/getPrjInfoAttach?prjId=00000";
+	var columns = [{
+		checkbox: true
+	},
+	{
+		field: "id",
+		visible: false,
+		title: "id",
+	},
+	{
+		field: "",
+		title: "序号",
+		formatter: function(value, row, index) {
+			return index+1
+		}
+	},
+	{
+		field: "name",
+		title: "附件名称"
+	},
+	{
+		field: "",
+		title: "上传状态",
+		formatter: function(value, row, index) {
+			if (row.attachUrl=="") {
+				return "<p>待上传</p>"
+			} else {
+				return "<p>已上传</p>"
+			}
+		}
+	},
+	{
+		field: "createDate",
+		title: "上传时间"
+	},
+	{
+		field: "",
+		title: "操作",
+		formatter: function(value, row, index) {
+			if (!row.attachUrl) {
+				return '<input  class="input-files" name="files" filePlural="文件" multiple type="file" data-show-caption="true">'
+			} else {
+
+				return "<a  download='" + row.name + "' href='" + domainPath + row.attachUrl + "' >查看</a>&nbsp;&nbsp;&nbsp;<a href='javascript:;' data-id='"+row.id+"' class='reds delFile'>删除</a>"
+
+			}
+		}
+	}
+	
+	];
+	mainList.Init = function() {
+		$("#tableBs").bootstrapTable(getBsTableOptions(url, "toolbar", columns, mainList.queryParams, null,null,300))
+	};
+	mainList.queryParams = function(params) {
+		var temp = {
+			pageSize: params.pageSize,
+			pageNumber: params.pageNumber,
+		};
+		return temp
+	};
+	return mainList
+}

@@ -1,0 +1,333 @@
+package com.dadi.nyd.entity;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.dadi.sys.entity.Dict;
+import com.dadi.sys.model.BaseEntity;
+
+@Entity
+@Table(name = "prj_info")
+public class PrjInfo extends BaseEntity {
+	private static final long serialVersionUID = 1L;
+
+	private String applier; // 申请人
+	private String prj_name; // 农业生产项目名称
+	private String prj_leader; // 项目负责人
+	private String idcard; // 身份证号
+	private String phone; // 联系电话
+	private String location; // 土地坐落
+	private Dict record_type_id; // 备案类型（字典：初次备案，续期）
+	private String boundary; // 设施用地四至位置
+	private Integer prod_yon_doc; // 生产设施-是否有承诺书
+	private BigDecimal prod_total_area; // 生产-总面积
+	private BigDecimal prod_farmland; // 生产-耕地
+	private BigDecimal prod_garden; // 生产-园地
+	private BigDecimal prod_woodland; // 生产-林地
+	private BigDecimal prod_other; // 生产-其他
+	private BigDecimal prod_base_land; // 生产-基本农田
+	private BigDecimal prod_construct_land; // 生产-建设用地
+	private BigDecimal prod_unused_land; // 生产-未利用地
+	private Integer attach_yon_doc; // 附属-是否有承诺书
+	private BigDecimal attach_total_area; // 附属--总面积
+	private BigDecimal attach_farmland; // 附属-耕地
+	private BigDecimal attach_garden; // 附属-园地
+	private BigDecimal attach_wookland; // 附属-林地
+	private BigDecimal attach_other; // 附属-其他
+	private BigDecimal attach_construct_land; // 附属-建设用地
+	private BigDecimal attach_unused_land; // 附属-未利用地
+	private Integer assort_total_doc; // 配套-是否有承诺书/补划方案
+	private BigDecimal accort_area; // 配套-总面积
+	private BigDecimal asort_farmland; // 配套-耕地
+	private BigDecimal assort_garden; // 配套-园林
+	private BigDecimal assort_woodland; // 配套-林地
+	private BigDecimal assort_other; // 配套-其他
+	private BigDecimal assort_construct; // 配套-建设用地
+	private BigDecimal assort_unused; // 配套未利用地
+	private Date prj_start_time; // 项目开始时间
+	private Date prj_end_time; // 项目结束时间
+
+	public String getApplier() {
+		return applier;
+	}
+
+	public void setApplier(String applier) {
+		this.applier = applier;
+	}
+
+	public String getPrj_name() {
+		return prj_name;
+	}
+
+	public void setPrj_name(String prj_name) {
+		this.prj_name = prj_name;
+	}
+
+	public String getPrj_leader() {
+		return prj_leader;
+	}
+
+	public void setPrj_leader(String prj_leader) {
+		this.prj_leader = prj_leader;
+	}
+
+	public String getIdcard() {
+		return idcard;
+	}
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Dict getRecord_type_id() {
+		return record_type_id;
+	}
+
+	public void setRecord_type_id(Dict record_type_id) {
+		this.record_type_id = record_type_id;
+	}
+
+	public String getBoundary() {
+		return boundary;
+	}
+
+	public void setBoundary(String boundary) {
+		this.boundary = boundary;
+	}
+
+	public Integer getProd_yon_doc() {
+		return prod_yon_doc;
+	}
+
+	public void setProd_yon_doc(Integer prod_yon_doc) {
+		this.prod_yon_doc = prod_yon_doc;
+	}
+
+	public BigDecimal getProd_total_area() {
+		return prod_total_area;
+	}
+
+	public void setProd_total_area(BigDecimal prod_total_area) {
+		this.prod_total_area = prod_total_area;
+	}
+
+	public BigDecimal getProd_farmland() {
+		return prod_farmland;
+	}
+
+	public void setProd_farmland(BigDecimal prod_farmland) {
+		this.prod_farmland = prod_farmland;
+	}
+
+	public BigDecimal getProd_garden() {
+		return prod_garden;
+	}
+
+	public void setProd_garden(BigDecimal prod_garden) {
+		this.prod_garden = prod_garden;
+	}
+
+	public BigDecimal getProd_woodland() {
+		return prod_woodland;
+	}
+
+	public void setProd_woodland(BigDecimal prod_woodland) {
+		this.prod_woodland = prod_woodland;
+	}
+
+	public BigDecimal getProd_other() {
+		return prod_other;
+	}
+
+	public void setProd_other(BigDecimal prod_other) {
+		this.prod_other = prod_other;
+	}
+
+	public BigDecimal getProd_base_land() {
+		return prod_base_land;
+	}
+
+	public void setProd_base_land(BigDecimal prod_base_land) {
+		this.prod_base_land = prod_base_land;
+	}
+
+	public BigDecimal getProd_construct_land() {
+		return prod_construct_land;
+	}
+
+	public void setProd_construct_land(BigDecimal prod_construct_land) {
+		this.prod_construct_land = prod_construct_land;
+	}
+
+	public BigDecimal getProd_unused_land() {
+		return prod_unused_land;
+	}
+
+	public void setProd_unused_land(BigDecimal prod_unused_land) {
+		this.prod_unused_land = prod_unused_land;
+	}
+
+	public Integer getAttach_yon_doc() {
+		return attach_yon_doc;
+	}
+
+	public void setAttach_yon_doc(Integer attach_yon_doc) {
+		this.attach_yon_doc = attach_yon_doc;
+	}
+
+	public BigDecimal getAttach_total_area() {
+		return attach_total_area;
+	}
+
+	public void setAttach_total_area(BigDecimal attach_total_area) {
+		this.attach_total_area = attach_total_area;
+	}
+
+	public BigDecimal getAttach_farmland() {
+		return attach_farmland;
+	}
+
+	public void setAttach_farmland(BigDecimal attach_farmland) {
+		this.attach_farmland = attach_farmland;
+	}
+
+	public BigDecimal getAttach_garden() {
+		return attach_garden;
+	}
+
+	public void setAttach_garden(BigDecimal attach_garden) {
+		this.attach_garden = attach_garden;
+	}
+
+	public BigDecimal getAttach_wookland() {
+		return attach_wookland;
+	}
+
+	public void setAttach_wookland(BigDecimal attach_wookland) {
+		this.attach_wookland = attach_wookland;
+	}
+
+	public BigDecimal getAttach_other() {
+		return attach_other;
+	}
+
+	public void setAttach_other(BigDecimal attach_other) {
+		this.attach_other = attach_other;
+	}
+
+	public BigDecimal getAttach_construct_land() {
+		return attach_construct_land;
+	}
+
+	public void setAttach_construct_land(BigDecimal attach_construct_land) {
+		this.attach_construct_land = attach_construct_land;
+	}
+
+	public BigDecimal getAttach_unused_land() {
+		return attach_unused_land;
+	}
+
+	public void setAttach_unused_land(BigDecimal attach_unused_land) {
+		this.attach_unused_land = attach_unused_land;
+	}
+
+	public Integer getAssort_total_doc() {
+		return assort_total_doc;
+	}
+
+	public void setAssort_total_doc(Integer assort_total_doc) {
+		this.assort_total_doc = assort_total_doc;
+	}
+
+	public BigDecimal getAccort_area() {
+		return accort_area;
+	}
+
+	public void setAccort_area(BigDecimal accort_area) {
+		this.accort_area = accort_area;
+	}
+
+	public BigDecimal getAsort_farmland() {
+		return asort_farmland;
+	}
+
+	public void setAsort_farmland(BigDecimal asort_farmland) {
+		this.asort_farmland = asort_farmland;
+	}
+
+	public BigDecimal getAssort_garden() {
+		return assort_garden;
+	}
+
+	public void setAssort_garden(BigDecimal assort_garden) {
+		this.assort_garden = assort_garden;
+	}
+
+	public BigDecimal getAssort_woodland() {
+		return assort_woodland;
+	}
+
+	public void setAssort_woodland(BigDecimal assort_woodland) {
+		this.assort_woodland = assort_woodland;
+	}
+
+	public BigDecimal getAssort_other() {
+		return assort_other;
+	}
+
+	public void setAssort_other(BigDecimal assort_other) {
+		this.assort_other = assort_other;
+	}
+
+	public BigDecimal getAssort_construct() {
+		return assort_construct;
+	}
+
+	public void setAssort_construct(BigDecimal assort_construct) {
+		this.assort_construct = assort_construct;
+	}
+
+	public BigDecimal getAssort_unused() {
+		return assort_unused;
+	}
+
+	public void setAssort_unused(BigDecimal assort_unused) {
+		this.assort_unused = assort_unused;
+	}
+
+	public Date getPrj_start_time() {
+		return prj_start_time;
+	}
+
+	public void setPrj_start_time(Date prj_start_time) {
+		this.prj_start_time = prj_start_time;
+	}
+
+	public Date getPrj_end_time() {
+		return prj_end_time;
+	}
+
+	public void setPrj_end_time(Date prj_end_time) {
+		this.prj_end_time = prj_end_time;
+	}
+
+}
