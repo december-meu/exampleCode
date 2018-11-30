@@ -1,0 +1,46 @@
+下载地址 https://gitforwindows.org/
+安装完成后，在开始菜单里找到“Git”->“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功
+
+git config --global user.name "Your Name"
+git config --global user.email "email@example.com"
+因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址
+
+在本地创建一个目录
+git init
+通过git init命令把这个目录变成Git可以管理的仓库
+当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的
+
+需要管理的文件必须放在仓库目录下
+
+提交文件：
+第一步使用命令git add <file>，注意，可反复多次使用，添加多个文件；
+第二部使用命令git commit -m "备注"，完成。
+
+关联远程仓库 云仓库
+登录官网https://github.com 注册用户
+我的账号december-meu
+要关联一个远程库，使用命令git remote add origin https://github.com/december-meu/exampleCode.git
+
+重新关联远程仓库
+先删除
+git remote rm origin
+后添加
+git remote add origin https://xxx.git 
+
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改
+
+删除文件
+rm test.txt
+工作区和版本库就不一致了，git status命令会立刻告诉你哪些文件被删除了
+现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令git rm -- test.txt删掉，并且git commit
+另一种情况是删错了，因为版本库里还有呢，git checkout -- test.txt可以把误删的文件恢复到最新版本
+
+git删除远程仓库的文件或目录
+git rm -r --cached a/2.txt //删除a目录下的2.txt文件   删除a目录git rm -r --cached a
+git commit -m "删除a目录下的2.txt文件" 
+git push
+
+同步远程仓库与本地仓库
+git pull --rebase origin master
+
